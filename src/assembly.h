@@ -528,8 +528,10 @@ __attribute__((__always_inline__)) static inline int MULSHIFT32(int u, int v)
 
     u0 = u & 0xFFFF;  u1 = u >> 16;
     v0 = v & 0xFFFF;  v1 = v >> 16;
-    w0 = u0*v0;
-    t  = u1*v0 + (w0 >> 16);
+	// Skip the low multiply as this can only contribute 1 bit difference
+	// to the result.
+    //w0 = u0*v0;
+    t  = u1*v0;// + (w0 >> 16);
     w1 = t & 0xFFFF;
     w2 = t >> 16;
     w1 = u0*v1 + w1;
