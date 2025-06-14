@@ -41,6 +41,8 @@
  * dqchan.c - dequantization of transform coefficients
  **************************************************************************************/
 
+#include <pico/stdlib.h>
+
 #include "coder.h"
 #include "assembly.h"
 #include <stdint.h>
@@ -130,7 +132,7 @@ static const int pow2frac[8] = {
  *
  * Return:      bitwise-OR of the unsigned outputs (for guard bit calculations)
  **************************************************************************************/
-/*__attribute__ ((section (".data")))*/ static int DequantBlock(int *inbuf, int *outbuf, int num, int scale)
+/*__attribute__ ((section (".data")))*/ static int __no_inline_not_in_flash_func(DequantBlock)(int *inbuf, int *outbuf, int num, int scale)
 {
 	int tab4[4];
 	int scalef, scalei, shift;
@@ -242,7 +244,7 @@ static const int pow2frac[8] = {
  *
  * Notes:       dequantized samples in Q(DQ_FRACBITS_OUT) format 
  **************************************************************************************/
-/*__attribute__ ((section (".data")))*/ int DequantChannel(int *sampleBuf, int *workBuf, int *nonZeroBound, FrameHeader *fh, SideInfoSub *sis, 
+/*__attribute__ ((section (".data")))*/ int __no_inline_not_in_flash_func(DequantChannel)(int *sampleBuf, int *workBuf, int *nonZeroBound, FrameHeader *fh, SideInfoSub *sis, 
 					ScaleFactorInfoSub *sfis, CriticalBandInfo *cbi)
 {
 	int i, j, w, cb;

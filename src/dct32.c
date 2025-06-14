@@ -42,6 +42,8 @@
  *             polyphase filter
  **************************************************************************************/
 
+#include <pico/stdlib.h>
+
 #include "coder.h"
 #include "assembly.h"
 
@@ -141,7 +143,7 @@ static const int dcttab[48] = {
  *                enough registers)
  **************************************************************************************/
 // about 1ms faster in RAM
-/*__attribute__ ((section (".data")))*/ void FDCT32(int *buf, int *dest, int offset, int oddBlock, int gb)
+/*__attribute__ ((section (".data")))*/ void __no_inline_not_in_flash_func(FDCT32)(int *buf, int *dest, int offset, int oddBlock, int gb)
 {
     int i, s, tmp, es;
     const int *cptr = dcttab;

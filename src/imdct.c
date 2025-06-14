@@ -42,6 +42,8 @@
  *             overlap-add, frequency inversion
  **************************************************************************************/
 
+#include <pico/stdlib.h>
+
 #include "coder.h"
 #include "assembly.h"
 #include <stdint.h>
@@ -71,7 +73,7 @@
  *                 gain from AntiAlias < 2.0)
  **************************************************************************************/
 // a little bit faster in RAM (< 1 ms per block)
-/* __attribute__ ((section (".data"))) */ static void AntiAlias(int *x, int nBfly)
+/* __attribute__ ((section (".data"))) */ static void __no_inline_not_in_flash_func(AntiAlias)(int *x, int nBfly)
 {
 	int k, a0, b0, c0, c1;
 	const int *c;
