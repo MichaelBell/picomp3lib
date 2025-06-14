@@ -45,6 +45,8 @@ static bool file_read(FIL* fil, void* buffer, uint size, const char* msg);
 
 //#define DEBUG_STATUS
 
+#define NO_LOOP
+
 // Extra debug
 #ifdef DEBUG_STATUS
   #define STATUS(a) printf a
@@ -321,7 +323,7 @@ static bool mp3FileRead(music_file* mf, int16_t* dest, uint32_t len, uint32_t* w
         }
     } while (state == ID_OK);
 
-    return (state == ID_FULL || state == ID_EOF);
+    return (state == ID_FULL);
 }
 
 
